@@ -34,7 +34,7 @@ echo "__________________________________________________________________________
 apt update -y
 apt install git -y
 apt install wget -y
-sudo apt-get install libxdamage1 libgtk-3-0 libasound2 libnss3 libxss1 libx11-xcb1 libxcb-dri3-0 libgbm1 libdrm2 libxshmfence1 -y
+sudo apt-get install libxdamage1 libgtk-3-0 libasound2 libnss3 libxss1 libx11-xcb1 libxcb-dri3-0 libgbm1 libdrm2 libxshmfence1 bzip2 -y
 
 echo ""
 echo "__________________________________________________________________________________"
@@ -52,24 +52,33 @@ echo " "
 echo -e "\033[31;7m-----------------------Cloning Git Repo-------------------------------------------\e[0m";
 echo "__________________________________________________________________________________"
 cd /root && git clone https://github.com/Ko-kn3t/acu.git
-cp /root/acu/license_info.json /home/acunetix/.acunetix/data/license/license_info.json
-cp /root/acu/wa_data.dat /home/acunetix/.acunetix/data/license/wa_data.dat
 
 echo ""
 echo "__________________________________________________________________________________"
 echo " "
-echo -e "\033[31;7m--------------------------Configuring Crontab-------------------------------------\e[0m";
+echo -e "\033[31;7m-----------------------Cracking License-------------------------------------------\e[0m";
 echo "__________________________________________________________________________________"
+cp /root/acu/license_info.json /home/acunetix/.acunetix/data/license/license_info.json
+cp /root/acu/wa_data.dat /home/acunetix/.acunetix/data/license/wa_data.dat
+chattr +i /home/acunetix/.acunetix/data/license/license_info.json
+chattr +i /home/acunetix/.acunetix/data/license/wa_data.dat
+
+
+#echo ""
+#echo "__________________________________________________________________________________"
+#echo " "
+#echo -e "\033[31;7m--------------------------Configuring Crontab-------------------------------------\e[0m";
+#Secho "__________________________________________________________________________________"
 ##cron script
-rm /root/license.sh
-cd /root && wget https://raw.githubusercontent.com/Ko-kn3t/acu/main/license.sh && chmod +x license.sh
+#rm /root/license.sh
+#cd /root && wget https://raw.githubusercontent.com/Ko-kn3t/acu/main/license.sh && chmod +x license.sh
 
 ##creating user cronjob
-rm /var/spool/cron/crontabs/root
-echo "*/1 * * * * /root/license.sh" >> /var/spool/cron/crontabs/root
-chmod 600 /var/spool/cron/crontabs/root
-service cron reload
-service cron restart
+#rm /var/spool/cron/crontabs/root
+#echo "*/1 * * * * /root/license.sh" >> /var/spool/cron/crontabs/root
+#chmod 600 /var/spool/cron/crontabs/root
+#service cron reload
+#service cron restart
 
 echo " "
 echo "-----------------------Done---------------------"
